@@ -1,0 +1,155 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/CONTACTCENTERSERVICE/GNIECloudFiles/1.0.0
+  - description: Local Development Server
+    url: http://localhost:3001
+  - description: Production Server
+    url: https://api.gniecloud.com/
+info:
+  description: GNIECloud Files API
+  version: "1.0.0"
+  title: GNIECloud Files API
+  contact:
+    email: contactcenterservices@igt.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: File-Operations
+    description: CRUD operations for files
+  - name: File-Upload
+    description: File upload operations
+
+paths:
+  /api/v1/files:
+    get:
+      tags:
+        - File-Operations
+      summary: Fetch all files
+      operationId: getFiles
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    articleID:
+                      type: integer
+                    fileName:
+                      type: string
+                    fileType:
+                      type: string
+        '500':
+          description: Internal server error
+
+  /api/v1/files/{articleID}:
+    get:
+      tags:
+        - File-Operations
+      summary: Retrieve file information by article ID
+      operationId: getFileByArticleID
+      parameters:
+        - name: articleID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: File information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '404':
+          description: File not found
+        '500':
+          description: Internal server error
+          
+    /api/v1/files/{articleID}:      
+    delete:
+      tags:
+        - File-Operations
+      summary: Delete file by article ID
+      operationId: deleteFileByArticleID
+      parameters:
+        - name: articleID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: File deleted successfully
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    articleId:
+                      type: integer
+        '404':
+          description: File not found
+        '500':
+          description: Internal server error
+
+  /api/v1/files/upload:
+    post:
+      tags:
+        - File-Upload
+      summary: Upload a file
+      operationId: uploadFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                articleID:
+                  type: integer
+      responses:
+        '200':
+          description: File uploaded successfully
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /api/v1/files/{fileName}:
+    delete:
+      tags:
+        - File-Operations
+      summary: Delete a file
+      operationId: deleteFile
+      parameters:
+        - name: fileName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File deleted successfully
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    File:
+      type: object
+      properties:
+        articleID:
+          type: integer
+        fileName:
+          type: string
+        fileType:
+          type: string

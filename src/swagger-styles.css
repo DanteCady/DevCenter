@@ -1,0 +1,41 @@
+/* swagger-styles.css */
+
+/* Change text color for specific elements in dark mode */
+.dark-mode .swagger-ui .opblock .opblock-summary-operation-id,
+.dark-mode .swagger-ui .opblock .opblock-summary-path,
+.dark-mode .swagger-ui .opblock .opblock-summary-path__deprecated,
+.dark-mode .swagger-ui .opblock-tag,
+.dark-mode .swagger-ui .info .title,
+.dark-mode .swagger-ui .info p,
+.dark-mode .swagger-ui .opblock-tag small,
+.dark-mode .swagger-ui section.models h4,
+.dark-mode .swagger-ui .model-title,
+.dark-mode .swagger-ui .model,
+.dark-mode .swagger-ui,
+.dark-mode .swagger-ui .opblock .opblock-summary-description,
+.dark-mode .swagger-ui .opblock-description-wrapper p,
+.dark-mode .swagger-ui .response-col_status,
+.dark-mode .swagger-ui table thead tr td, .swagger-ui table thead tr th,
+.dark-mode .swagger-ui .response-col_links,
+.dark-mode .swagger-ui .parameter__name,
+.dark-mode .swagger-ui .parameter__type,
+.dark-mode .swagger-ui .tab li  {
+  color: white;
+}
+.dark-mode .MuiSelect-select {
+  color: #000; /* Set the text color */
+}
+.dark-mode .swagger-ui .scheme-container {
+    background: #121212;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.0);
+    margin: 0 0 20px;
+    padding: 30px 0;
+}
+
+.light-mode .swagger-ui .scheme-container {
+
+  background: white !important;
+}
+.container {
+  width: 100% !important;
+} 

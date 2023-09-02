@@ -1,0 +1,445 @@
+openapi: 3.0.0
+servers:
+  - description: Local Development Server
+    url: http://localhost:3001
+  - description: Production Server
+    url: https://api.joomla.com/
+info:
+  description: Joomla API
+  version: "1.0.0"
+  title: Joomla API
+  contact:
+    email: api@joomla.com
+  license:
+    name: GNU General Public License v2
+    url: 'https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html'
+tags:
+  - name: Content
+    description: API operations for content management
+  - name: Users
+    description: API operations for user management
+
+#### Content #####
+paths:
+  /api/v1/content/articles:
+    get:
+      tags:
+        - Content
+      summary: Fetch all articles
+      operationId: getArticles
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Content
+      summary: Create a new article
+      operationId: createArticle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleInput'
+      responses:
+        '201':
+          description: Article created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /api/v1/content/articles/{articleID}:
+    get:
+      tags:
+        - Content
+      summary: Retrieve article by ID
+      operationId: getArticleByID
+      parameters:
+        - name: articleID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Article retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '404':
+          description: Article not found
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+        - Content
+      summary: Update article by ID
+      operationId: updateArticleByID
+      parameters:
+        - name: articleID
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleInput'
+      responses:
+        '200':
+          description: Article updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '404':
+          description: Article not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - Content
+      summary: Delete article by ID
+      operationId: deleteArticleByID
+      parameters:
+        - name: articleID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Article deleted successfully
+        '404':
+          description: Article not found
+        '500':
+          description: Internal server error
+
+  /api/v1/content/articles/{articleID}/comments:
+    get:
+      tags:
+        - Content
+      summary: Fetch comments for article by ID
+      operationId: getArticleComments
+      parameters:
+        - name: articleID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '404':
+          description: Article not found
+        '500':
+          description: Internal server error
+
+  /api/v1/content/categories:
+    get:
+      tags:
+        - Content
+      summary: Fetch all categories
+      operationId: getCategories
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '500':
+          description: Internal server error
+
+ ##### Users #####
+
+  /api/index.php/v1/users:
+    get:
+      tags:
+          - Users
+      summary: Get List of Users
+      operationId: getUsers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - user_id: 1
+                  username: user1
+                - user_id: 2
+                  username: user2
+   
+    /api/index.php/v1/users -d:
+    post:
+     tags:
+        - Users
+     summary: Create User
+    operationId: createUser
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              block:
+                type: string
+              email:
+                type: string
+                format: email
+              groups:
+                type: array
+                items:
+                  type: string
+              name:
+                type: string
+              params:
+                type: object
+                properties:
+                  admin_language:
+                    type: string
+                  admin_style:
+                    type: string
+                  editor:
+                    type: string
+                  helpsite:
+                    type: string
+                  language:
+                    type: string
+                  timezone:
+                    type: string
+              password:
+                type: string
+              password2:
+                type: string
+              requireReset:
+                type: string
+              username:
+                type: string
+    responses:
+      '200':
+        description: User created successfully
+        content:
+          application/json:
+            example:
+              message: User created successfully
+
+  /api/index.php/v1/users/{user_id}:
+    get:
+      tags:
+          - Users
+      summary: Get Single User
+      operationId: getUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                username: user1
+    /api/index.php/v1/users -d:            
+    delete:
+      tags:
+          - Users
+      summary: Delete User
+      operationId: deleteUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              example:
+                message: User deleted successfully
+    /api/index.php/v1/users/{user_id} -d:            
+    patch:
+      tags:
+          - Users
+      summary: Update User
+      operationId: updateUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                groups:
+                  type: array
+                  items:
+                    type: string
+                name:
+                  type: string
+                username:
+                  type: string
+      responses:
+        '200':
+          description: User updated successfully
+
+##### Tags #####
+
+  /api/index.php/v1/tags:
+    get:
+      tags:
+        - Content
+      summary: Get List of Tags
+      operationId: getTags
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - tag_id: 1
+                  title: tag1
+                - tag_id: 2
+                  title: tag2
+
+  /api/index.php/v1/tags/{tag_id}:
+    get:
+      tags:
+        - Content
+      summary: Get Single Tag
+      operationId: getTag
+      parameters:
+        - name: tag_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                tag_id: 1
+                title: tag1
+    delete:
+      tags:
+        - Content
+      summary: Delete Tag
+      operationId: deleteTag
+      parameters:
+        - name: tag_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tag deleted successfully
+          content:
+            application/json:
+              example:
+                message: Tag deleted successfully
+    patch:
+      tags:
+        - Content
+      summary: Update Tag
+      operationId: updateTag
+      parameters:
+        - name: tag_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  type: string
+                title:
+                  type: string
+      responses:
+        '200':
+          description: Tag updated successfully
+          content:
+            application/json:
+              example:
+                message: Tag updated successfully
+
+  /api/index.php/v1/tags -d:
+    post:
+      tags:
+        - Content
+      summary: Create Tag
+      operationId: createTag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access:
+                  type: integer
+                access_title:
+                  type: string
+                alias:
+                  type: string
+                description:
+                  type: string
+                language:
+                  type: string
+                note:
+                  type: string
+                parent_id:
+                  type: integer
+                path:
+                  type: string
+                published:
+                  type: integer
+                title:
+                  type: string
+      responses:
+        '200':
+          description: Tag created successfully
+          content:
+            application/json:
+              example:
+                message: Tag created successfully
