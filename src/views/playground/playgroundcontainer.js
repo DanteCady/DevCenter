@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  Container, Paper, Grid, Typography, TextField, Button, TextareaAutosize, FormControl,
-  Select, MenuItem, CssBaseline, List, ListItem, ListItemText, CircularProgress,
-  Collapse, ListItemIcon,
+  Container, Paper, Grid, List, ListItem,
+  ListItemText, Typography, CircularProgress,
+  Collapse, ListItemIcon, TextField, Button,
+  TextareaAutosize, CssBaseline, FormControl,
+  Select, MenuItem,
 } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Header from '../../components/header';
+import { useDarkMode } from '../../DarkModeContext';
 
 const App = () => {
-  const [requestMethod, setRequestMethod] = useState('GET');
-  const [requestUrl, setRequestUrl] = useState('');
-  const [requestBody, setRequestBody] = useState('');
-  const [response, setResponse] = useState('');
+  const { darkMode, setDarkMode } = useDarkMode();
   const [apiList, setApiList] = useState([]);
   const [swaggerData, setSwaggerData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [openApi, setOpenApi] = useState({});
   const [selectedApi, setSelectedApi] = useState(null);
+  const [selectedMethod, setSelectedMethod] = useState('GET');
+  const [openApi, setOpenApi] = useState({});
+  const [requestBody, setRequestBody] = useState('');
+  const [response, setResponse] = useState(null);
+  const [protocol, setProtocol] = useState('https'); // Default to HTTPS
+  const [requestUrl, setRequestUrl] = useState('');
 
   const getColorByMethod = (method) => {
     switch (method.toUpperCase()) {
@@ -61,24 +66,28 @@ const App = () => {
       });
   }, [selectedApi]);
 
-  const toggleApi = (api, path) => {
-    setOpenApi({
-      ...openApi,
-      [api]: !openApi[api],
-    });
-    setSelectedApi(api);
-    if (path) {
-      setRequestUrl(`https://api.gniecloud.com${path}`);
-    } else {
-      setRequestUrl('');
-    }
-  };
+const toggleApi = (api, path) => {
+  setOpenApi({
+    ...openApi,
+    [api]: !openApi[api],
+  });
+  setSelectedApi(api);
 
-  const executeApi = () => {
-    const fullApiUrl = requestUrl.startsWith('http') ? requestUrl : `https://api.gniecloud.com${requestUrl}`;
+  if (path) {
+    setRequestUrl(`https://api.gniecloud.com${path}`);
+    setSelectedMethod('GET'); // Set the default method to 'GET'
+  } else {
+    setRequestUrl('');
+    setSelectedMethod(null);
+  }
+};
+
+ const executeApi = () => {
+  if (selectedApi && selectedMethod && requestUrl) {
+    const fullApiUrl = requestUrl; // Use the requestUrl directly
 
     const requestConfig = {
-      method: requestMethod,
+      method: selectedMethod.toUpperCase(),
       url: fullApiUrl,
       data: requestBody,
     };
@@ -94,18 +103,20 @@ const App = () => {
           setResponse('An error occurred while making the request.');
         }
       });
-  };
+  }
+};
+
 
   return (
     <>
-      <Header />
       <CssBaseline />
-      <Container maxWidth="lg" style={{ paddingTop: '20px' }}>
-        <Grid container spacing={2}>
+      <Header />
+      <Container maxWidth={false} disableGutters style={{ backgroundColor: darkMode ? '#333' : '#f5f5f5', height: '100vh' }}>
+        <Grid container spacing={3}>
           <Grid item xs={3}>
-            <Paper elevation={3} style={{ backgroundColor: '#fff' }}>
-              <Typography variant="h6" align="center">
-                API List
+            <Paper elevation={3} style={{ backgroundColor: darkMode ? '#333' : '#fff' }}>
+              <Typography variant="h6" align="center" style={{ color: darkMode ? '#fff' : '#000' }}>
+                GNIECloud API List
               </Typography>
               {isLoading ? (
                 <CircularProgress />
@@ -117,8 +128,9 @@ const App = () => {
                         button
                         key={apiIndex}
                         onClick={() => toggleApi(api)}
+                        style={{ border: darkMode ? 'none' : '1px solid #ccc' }}
                       >
-                        <ListItemText primary={api} />
+                        <ListItemText primary={api} style={{ color: darkMode ? '#fff' : '#000' }} />
                         <ListItemIcon>
                           {openApi[api] ? <ExpandLess /> : <ExpandMore />}
                         </ListItemIcon>
@@ -136,6 +148,7 @@ const App = () => {
                               onClick={() => toggleApi(api, path)}
                               style={{
                                 border: `3px solid ${getColorByMethod(Object.keys(methods)[0])}`,
+                                backgroundColor: openApi[api] ? '#f5f5f5' : 'transparent',
                                 paddingLeft: '10px',
                                 margin: '3px',
                               }}
@@ -157,6 +170,7 @@ const App = () => {
                                     {path}
                                   </>
                                 }
+                                style={{ color: darkMode ? '#000' : '#333' }}
                               />
                             </ListItem>
                           ))}
@@ -169,53 +183,72 @@ const App = () => {
             </Paper>
           </Grid>
           <Grid item xs={9}>
-            <Paper elevation={3} style={{ padding: '20px' }}>
-              <Typography variant="h6" align="center">
-                API Tester
+            <Paper elevation={3} style={{ backgroundColor: darkMode ? '#444' : '#f5f5f5' }}>
+              <Typography variant="h6" align="center" style={{ color: darkMode ? '#fff' : '#000' }}>
+                API Testing Area
               </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={2}>
-                  <FormControl fullWidth>
-                    <Select
-                      value={requestMethod}
-                      onChange={(e) => setRequestMethod(e.target.value)}
+              {selectedApi && (
+                <>
+                  <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#000' }}>
+                    Selected API: {selectedApi}
+                  </Typography>
+                  <div>
+                    <FormControl
+                      variant="outlined"
+                      style={{ margin: '1em 0' }}
                     >
-                      <MenuItem value="GET">GET</MenuItem>
-                      <MenuItem value="POST">POST</MenuItem>
-                      <MenuItem value="PUT">PUT</MenuItem>
-                      <MenuItem value="DELETE">DELETE</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={10}>
-                  <TextField
-                    fullWidth
-                    value={requestUrl}
-                    onChange={(e) => setRequestUrl(e.target.value)}
-                    variant="outlined"
-                    placeholder="Enter API URL"
-                  />
-                </Grid>
-              </Grid>
-              <TextareaAutosize
-                minRows={4}
-                value={requestBody}
-                onChange={(e) => setRequestBody(e.target.value)}
-                placeholder="Request Body (JSON)"
-                style={{ width: '100%', marginTop: '10px' }}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={executeApi}
-                style={{ marginTop: '10px' }}
-              >
-                Execute Request
-              </Button>
-              <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '10px', whiteSpace: 'pre-wrap' }}>
-                <Typography variant="h6">Response:</Typography>
-                {response}
-              </div>
+                      <Select
+                        labelId="method-label"
+                        value={selectedMethod}
+                        onChange={(e) => setSelectedMethod(e.target.value)}
+                        sx={{ backgroundColor: darkMode ? '#2F3033' : '#f9f9f9' }}
+                      >
+                        <MenuItem value="GET">GET</MenuItem>
+                        <MenuItem value="POST">POST</MenuItem>
+                        <MenuItem value="PUT">PUT</MenuItem>
+                        <MenuItem value="DELETE">DELETE</MenuItem>
+                      </Select>
+                    </FormControl>
+                   <TextField
+                      fullWidth
+                      value={requestUrl}
+                      onChange={(e) => setRequestUrl(e.target.value)}
+                      variant="outlined"
+                      style={{ margin: '1em 0' }}
+                      placeholder="Enter API path (e.g. /v1/resource)"
+                    />
+                    <TextareaAutosize
+                      minRows={3}
+                      style={{
+                        width: '100%',
+                        padding: '1em',
+                        backgroundColor: darkMode ? '#555' : '#fff',
+                        color: darkMode ? '#fff' : '#000',
+                        border: '1px solid #ccc',
+                      }}
+                      onChange={(e) => setRequestBody(e.target.value)}
+                    />
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={executeApi}
+                      sx={{ backgroundColor: '#0c51a1' }}
+                    >
+                      Execute
+                    </Button>
+                  </div>
+                  <div style={{ backgroundColor: darkMode ? '#333' : '#fff', padding: '1em', borderRadius: '5px', marginTop: '1em' }}>
+                    <Typography variant="h6" style={{ color: darkMode ? '#fff' : '#000' }}>Response</Typography>
+                    <pre style={{ color: darkMode ? '#fff' : '#000', overflowX: 'scroll' }}>
+                      {response !== null ? (
+                        response
+                      ) : (
+                        'Execute an API to see the response here.'
+                      )}
+                    </pre>
+                  </div>
+                </>
+              )}
             </Paper>
           </Grid>
         </Grid>
