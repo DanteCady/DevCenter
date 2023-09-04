@@ -114,10 +114,16 @@ const ApiExplorer = () => {
   };
 
 const theme = createTheme({
-    palette: {
-      mode: darkMode ? 'dark' : 'light',
-    },
-  });
+  palette: {
+    mode: darkMode ? 'dark' : 'light',
+    ...(darkMode && {
+      background: {
+        default: '#37383a',
+      },
+    }),
+  },
+});
+
 
   const pathnameSegments = location.pathname.split('/').filter(segment => segment !== '');
 

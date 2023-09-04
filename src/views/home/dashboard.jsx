@@ -53,7 +53,7 @@ const Dashboard = () => {
     palette: {
       type: darkMode ? 'dark' : 'light',
       background: {
-        default: darkMode ? '#121212' : '#fff',
+        default: darkMode ? '#37383a' : '#fff',
       },
     },
   });
