@@ -60,7 +60,7 @@ components:
         enabled:
           type: boolean
         maintenanceDetails:
-          type: object  # Modify this as needed
+          type: object
         
     MaintenanceStatus:
       type: object

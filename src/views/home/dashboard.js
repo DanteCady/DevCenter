@@ -29,11 +29,11 @@ import { useDarkMode } from '../../DarkModeContext';
 // Define tiles for dashboard
 const tiles = [
   { id: 'API Explorer', name: 'API Explorer', description: 'Discover, learn, and test the various APIs available to accelerate your development process. The API Explorer offers an interactive interface for our API endpoints.', Icon: ApiIcon, link: '/service/APIExplorer' },
-  { id: 'support-articles', name: 'Support Articles', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: BuildIcon, link: '/service/support' },
+  { id: 'support-articles', name: 'Support Articles', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: BuildIcon, link: '/service/Support' },
   { id: 'submit-request', name: 'Submit Request', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: HelpOutlineIcon, link: 'https://igt-apps.easyvista.com/s/ServiceDesk' },
-  { id: 'release-notes', name: 'Release Notes', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: UpdateIcon, link: '/service/releasenotes' },
-  { id: 'Status', name: 'Status', description: 'Real-time information on system health, including uptime statistics and performance metrics. Be the first to know about any service interruptions on our platform.', Icon: AnnouncementOutlinedIcon, link: '/service/status' },
-  { id: 'Playground', name: 'Playground', description: 'A sandbox environment where you can experiment with our APIs and features without any commitments. Ideal for learning and pre-production testing.', Icon: AnnouncementOutlinedIcon, link: '/service/status' },
+  { id: 'release-notes', name: 'Release Notes', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: UpdateIcon, link: '/service/ReleaseNotes' },
+  { id: 'Status', name: 'Status', description: 'Real-time information on system health, including uptime statistics and performance metrics. Be the first to know about any service interruptions on our platform.', Icon: AnnouncementOutlinedIcon, link: '/service/Status' },
+  { id: 'Playground', name: 'Playground', description: 'A sandbox environment where you can experiment with our APIs and features without any commitments. Ideal for learning and pre-production testing.', Icon: AnnouncementOutlinedIcon, link: '/service/apiplayground' },
 ];
 
 // Define tiles for dashboard

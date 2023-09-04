@@ -26,7 +26,7 @@
   color: #000; /* Set the text color */
 }
 .dark-mode .swagger-ui .scheme-container {
-    background: #121212;
+    background: #2F3033;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.0);
     margin: 0 0 20px;
     padding: 30px 0;
