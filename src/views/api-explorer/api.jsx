@@ -32,12 +32,13 @@ import axios from 'axios';
 import '../../swagger-styles.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useDarkMode } from '../../DarkModeContext';
 
 const ApiExplorer = () => {
+  const { darkMode, setDarkMode } = useDarkMode(); 
   const [apiList, setApiList] = useState([]);
   const [selectedApi, setSelectedApi] = useState('');
   const [swaggerData, setSwaggerData] = useState(null);
-  const [themeMode, setThemeMode] = useState('light');
   const [exportOptionsOpen, setExportOptionsOpen] = useState(false);
   const [totalApisPerApi, setTotalApisPerApi] = useState({});
 
@@ -80,20 +81,18 @@ const ApiExplorer = () => {
       });
   }, [selectedApi]);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setThemeMode(savedTheme);
-    } else {
-      localStorage.setItem('theme', 'light');
-      setThemeMode('light');
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem('theme');
+  //   if (savedTheme) {
+  //     setThemeMode(savedTheme);
+  //   } else {
+  //     localStorage.setItem('theme', 'light');
+  //     setThemeMode('light');
+  //   }
+  // }, []);
 
   const handleThemeChange = () => {
-    const newThemeMode = themeMode === 'light' ? 'dark' : 'light';
-    setThemeMode(newThemeMode);
-    localStorage.setItem('theme', newThemeMode);
+    setDarkMode(!darkMode);
   };
 
   const exportSwagger = (format) => {
@@ -114,9 +113,9 @@ const ApiExplorer = () => {
     }
   };
 
-  const theme = createTheme({
+const theme = createTheme({
     palette: {
-      mode: themeMode,
+      mode: darkMode ? 'dark' : 'light',
     },
   });
 
@@ -125,7 +124,7 @@ const ApiExplorer = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={themeMode === 'dark' ? 'dark-mode' : ''}>
+      <div className={darkMode ? 'dark-mode' : ''}>
         <AppBar position="static" sx={{ backgroundColor: '#0c51a1' }}>
           <Toolbar>
             {/* <Typography variant="h6">GNIECloud Swagger</Typography> */}
@@ -157,17 +156,17 @@ const ApiExplorer = () => {
                 </MenuItem>
               ))}
             </Select>
-            <Tooltip title={themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}>
-              <IconButton onClick={handleThemeChange} color="inherit">
-                {themeMode === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
-              </IconButton>
-            </Tooltip>
+            <Tooltip title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+          <IconButton onClick={handleThemeChange} color="inherit">
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+        </Tooltip>
             <Tooltip title="Export">
               <IconButton onClick={() => setExportOptionsOpen(true)} color="inherit">
                 <GetAppIcon />
               </IconButton>
             </Tooltip>
-            <Typography variant="subtitle1">Total APIs: {totalApisPerApi[selectedApi]}</Typography>
+            {/* <Typography variant="subtitle1">Total APIs: {totalApisPerApi[selectedApi]}</Typography> */}
           </Toolbar>
         </AppBar>
         <Container className="container">{swaggerData && <SwaggerUI spec={swaggerData} />}</Container>

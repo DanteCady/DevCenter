@@ -8,20 +8,23 @@ import ReleaseNotesPage from './views/releaseNotes/releaseNotes';
 import SupportArticles from './views/supportArticles/supprotArticles';
 import Forms from './views/forms/forms';
 import './App.css';
+import { DarkModeProvider } from './DarkModeContext';
 
 function App() {
   return (
-    <Router>
-      <CssBaseline />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/service/:service" element={<ApiExplorer/>} />
-        <Route path="/service/status" element={<StatusPage />} />
-        <Route path="/service/releasenotes" element={<ReleaseNotesPage />} />
-        <Route path="/service/support" element={<SupportArticles />} />
-        <Route path="/service/forms" element={<Forms />} />
-      </Routes>
-    </Router>
+     <DarkModeProvider>
+        <Router>
+          <CssBaseline />
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/service/:service" element={<ApiExplorer/>} />
+              <Route path="/service/status" element={<StatusPage />} />
+              <Route path="/service/releasenotes" element={<ReleaseNotesPage />} />
+              <Route path="/service/support" element={<SupportArticles />} />
+              <Route path="/service/forms" element={<Forms />} />
+            </Routes>
+          </Router>
+    </DarkModeProvider>
   );
 }
 

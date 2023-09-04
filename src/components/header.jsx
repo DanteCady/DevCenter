@@ -1,10 +1,15 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { IconButton, Toolbar, Typography, AppBar, Breadcrumbs, Link } from '@mui/material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { IconButton, Toolbar, Tooltip,  Typography, AppBar, Breadcrumbs, Link } from '@mui/material';
 import 'typeface-roboto';
+import { useDarkMode } from '../DarkModeContext';
+
 
 function Header({ title }) {
+  const { darkMode, setDarkMode } = useDarkMode();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,6 +37,11 @@ function Header({ title }) {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
           {title}
         </Typography>
+        <Tooltip title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+          <IconButton onClick={() => setDarkMode(!darkMode)} color="inherit">
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   );
