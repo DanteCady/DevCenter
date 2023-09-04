@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Typography, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import MaintenanceNotification from "../../components/maintenance"
+import { useDarkMode } from '../../DarkModeContext';
 
 const StatusPage = () => {
+  const { darkMode, setDarkMode } = useDarkMode();  
   const [selectedProvider, setSelectedProvider] = useState(null);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'true') {
+      setDarkMode(true);
+    }
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
 
   const handleProviderClick = (provider) => {
     setSelectedProvider(provider);
@@ -41,12 +54,17 @@ const StatusPage = () => {
     }
   };
 
+  // Conditional styles based on dark mode
+  const darkModeStyles = {
+    backgroundColor: darkMode ? '#3c3c3d' : '#fff',
+    color: darkMode ? '#ffffff' : '#000000'
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', ...darkModeStyles }}>
       <div style={{ flex: 1 }}>
         <Header />
         <MaintenanceNotification/>
-        {/* <Typography variant="h4">Status Page</Typography> */}
         <div>
           <Button
             variant="contained"
@@ -57,7 +75,7 @@ const StatusPage = () => {
           <Button
             variant="contained"
             onClick={() => handleProviderClick('genesys')}
-            style={{ backgroundColor: 'red', color: '#ffffff' }}
+            style={{ backgroundColor: darkMode ? '#555555' : 'red', color: darkMode ? '#ffffff' : '#ffffff' }}
           >
             Genesys Cloud
           </Button>
