@@ -11,7 +11,7 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Header from '../../components/header';
 import { useDarkMode } from '../../DarkModeContext';
 
-const App = () => {
+  const Playground = () => {
   const { darkMode, setDarkMode } = useDarkMode();
   const [apiList, setApiList] = useState([]);
   const [swaggerData, setSwaggerData] = useState({});
@@ -185,7 +185,7 @@ const toggleApi = (api, path) => {
           <Grid item xs={9}>
             <Paper elevation={3} style={{ backgroundColor: darkMode ? '#444' : '#f5f5f5' }}>
               <Typography variant="h6" align="center" style={{ color: darkMode ? '#fff' : '#000' }}>
-                API Testing Area
+                Send A Request
               </Typography>
               {selectedApi && (
                 <>
@@ -216,14 +216,19 @@ const toggleApi = (api, path) => {
                       variant="outlined"
                       style={{ margin: '1em 0' }}
                       placeholder="Enter API path (e.g. /v1/resource)"
+                      sx={{
+                        backgroundColor: darkMode ? '#2F3033' : '#f3f3f3',
+                        color: darkMode ? 'white' : 'black'
+                      }}
                     />
                     <TextareaAutosize
                       minRows={3}
+                      placeholder='response body'
                       style={{
                         width: '100%',
                         padding: '1em',
-                        backgroundColor: darkMode ? '#555' : '#fff',
-                        color: darkMode ? '#fff' : '#000',
+                        backgroundColor: darkMode ? '#2F3033' : '#f3f3f3',
+                        color: darkMode ? 'white' : 'black',
                         border: '1px solid #ccc',
                       }}
                       onChange={(e) => setRequestBody(e.target.value)}
@@ -257,4 +262,4 @@ const toggleApi = (api, path) => {
   );
 };
 
-export default App;
+export default Playground;
