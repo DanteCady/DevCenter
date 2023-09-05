@@ -19,6 +19,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import UpdateIcon from '@mui/icons-material/Update';
 import AnnouncementOutlinedIcon from '@mui/icons-material/AnnouncementOutlined';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import WelcomeContainer from '../../components/welcomeContainer';
@@ -33,7 +34,7 @@ const tiles = [
   { id: 'submit-request', name: 'Submit Request', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: HelpOutlineIcon, link: 'https://igt-apps.easyvista.com/s/ServiceDesk' },
   { id: 'release-notes', name: 'Release Notes', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of the GNIECloud platform.', Icon: UpdateIcon, link: '/service/ReleaseNotes' },
   { id: 'Status', name: 'Status', description: 'Real-time information on system health, including uptime statistics and performance metrics. Be the first to know about any service interruptions on our platform.', Icon: AnnouncementOutlinedIcon, link: '/service/Status' },
-  { id: 'Playground', name: 'Playground', description: 'A sandbox environment where you can experiment with our APIs and features without any commitments. Ideal for learning and pre-production testing.', Icon: AnnouncementOutlinedIcon, link: '/service/apiplayground' },
+  { id: 'Playground', name: 'Playground', description: 'A sandbox environment where you can experiment with our APIs and features without any commitments. Ideal for learning and pre-production testing.', Icon: EngineeringIcon, link: '/service/playground' },
 ];
 
 // Define tiles for dashboard

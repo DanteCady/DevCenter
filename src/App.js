@@ -7,7 +7,7 @@ import StatusPage from './views/status/status';
 import ReleaseNotesPage from './views/releaseNotes/releaseNotes';
 import SupportArticles from './views/supportArticles/supprotArticles';
 import Forms from './views/forms/forms';
-import APIPlayground from './views/playground/playgroundcontainer';
+import APIPlayground from './views/playground/playground';
 import './App.css';
 import { DarkModeProvider } from './DarkModeContext';
 
@@ -22,7 +22,7 @@ function App() {
               <Route path="/service/status" element={<StatusPage />} />
               <Route path="/service/releasenotes" element={<ReleaseNotesPage />} />
               <Route path="/service/support" element={<SupportArticles />} />
-              <Route path="/service/apiplayground" element={<APIPlayground />} />
+              <Route path="/service/playground" element={<APIPlayground />} />
               <Route path="/service/forms" element={<Forms />} />
             </Routes>
           </Router>

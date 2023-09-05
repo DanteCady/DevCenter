@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SwaggerUI from 'swagger-ui-react';
+import 'swagger-ui-react/swagger-ui.css';
 import {
   Container, Paper, Grid, List, ListItem,
   ListItemText, Typography, CircularProgress,
@@ -11,6 +13,7 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Header from '../../components/header';
 import { useDarkMode } from '../../DarkModeContext';
 
+// Playground component: Main component to execute and test API calls.
   const Playground = () => {
   const { darkMode, setDarkMode } = useDarkMode();
   const [apiList, setApiList] = useState([]);
@@ -24,6 +27,7 @@ import { useDarkMode } from '../../DarkModeContext';
   const [protocol, setProtocol] = useState('https'); // Default to HTTPS
   const [requestUrl, setRequestUrl] = useState('');
 
+     // Function to get color by HTTP method
   const getColorByMethod = (method) => {
     switch (method.toUpperCase()) {
       case 'GET':
@@ -39,7 +43,9 @@ import { useDarkMode } from '../../DarkModeContext';
     }
   };
 
-  useEffect(() => {
+    
+  // Effect hook for fetching the list of APIs
+    useEffect(() => {
     fetch('http://localhost:3001/api/docs/list')
       .then((response) => response.json())
       .then((data) => {
@@ -51,6 +57,7 @@ import { useDarkMode } from '../../DarkModeContext';
       });
   }, []);
 
+    // Effect hook for fetching Swagger data for selected API
   useEffect(() => {
     if (!selectedApi) return;
 
@@ -114,7 +121,7 @@ const toggleApi = (api, path) => {
       <Container maxWidth={false} disableGutters style={{ backgroundColor: darkMode ? '#333' : '#f5f5f5', height: '100vh' }}>
         <Grid container spacing={3}>
           <Grid item xs={3}>
-            <Paper elevation={3} style={{ backgroundColor: darkMode ? '#333' : '#fff' }}>
+            <Paper elevation={3} style={{ backgroundColor: darkMode ? '#444' : '#fff' }}>
               <Typography variant="h6" align="center" style={{ color: darkMode ? '#fff' : '#000' }}>
                 GNIECloud API List
               </Typography>
@@ -197,30 +204,39 @@ const toggleApi = (api, path) => {
                       variant="outlined"
                       style={{ margin: '1em 0' }}
                     >
-                      <Select
-                        labelId="method-label"
-                        value={selectedMethod}
-                        onChange={(e) => setSelectedMethod(e.target.value)}
-                        sx={{ backgroundColor: darkMode ? '#2F3033' : '#f9f9f9' }}
-                      >
-                        <MenuItem value="GET">GET</MenuItem>
-                        <MenuItem value="POST">POST</MenuItem>
-                        <MenuItem value="PUT">PUT</MenuItem>
-                        <MenuItem value="DELETE">DELETE</MenuItem>
-                      </Select>
-                    </FormControl>
-                   <TextField
-                      fullWidth
-                      value={requestUrl}
-                      onChange={(e) => setRequestUrl(e.target.value)}
-                      variant="outlined"
-                      style={{ margin: '1em 0' }}
-                      placeholder="Enter API path (e.g. /v1/resource)"
-                      sx={{
-                        backgroundColor: darkMode ? '#2F3033' : '#f3f3f3',
-                        color: darkMode ? 'white' : 'black'
+                     <Select
+                      labelId="method-label"
+                      value={selectedMethod}
+                      onChange={(e) => setSelectedMethod(e.target.value)}
+                      sx={{ color: darkMode ? '#f9f9f9' : '#2F3033' }}
+                      inputProps={{
+                        style: {
+                          color: darkMode ? 'white' : 'black',
+                        },
                       }}
-                    />
+                    >
+                      <MenuItem value="GET">GET</MenuItem>
+                      <MenuItem value="POST">POST</MenuItem>
+                      <MenuItem value="PUT">PUT</MenuItem>
+                      <MenuItem value="DELETE">DELETE</MenuItem>
+                    </Select>
+                    </FormControl>
+                    <TextField
+                        fullWidth
+                        value={requestUrl}
+                        onChange={(e) => setRequestUrl(e.target.value)}
+                        variant="outlined"
+                        style={{ margin: '1em 0' }}
+                        placeholder="Enter API path (e.g. /v1/resource)"
+                        sx={{
+                          backgroundColor: darkMode ? '#2F3033' : '#f3f3f3',
+                        }}
+                        InputProps={{
+                          style: {
+                            color: darkMode ? 'white' : 'black',
+                          },
+                        }}
+                      />
                     <TextareaAutosize
                       minRows={3}
                       placeholder='response body'
