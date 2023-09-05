@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const YAML = require('js-yaml');
 const cors = require('cors');
-
+const markdown = require('markdown-it')();
 const app = express();
 app.use(cors());
 
@@ -33,6 +33,19 @@ app.get('/api/docs/:apiName', (req, res) => {
         res.status(404).json({ message: 'API document not found' });
     }
 });
+
+// Get release notes in Markdown
+app.get('/api/release-notes', (req, res) => {
+    const releaseNotesPath = path.join(__dirname, './releaseNotes/relelaseNotes.md'); // Update the path to where your release notes file is stored
+
+    if (fs.existsSync(releaseNotesPath)) {
+        const releaseNotes = fs.readFileSync(releaseNotesPath, 'utf8');
+        res.json({ markdown: releaseNotes });
+    } else {
+        res.status(404).json({ message: 'Release notes not found' });
+    }
+});
+
 
 app.listen(3001, () => {
     console.log('Server running on http://localhost:3001');
