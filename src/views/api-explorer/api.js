@@ -33,6 +33,7 @@ import '../../swagger-styles.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useDarkMode } from '../../DarkModeContext';
+import MaintenanceNotification from '../../components/maintenance';
 
 const ApiExplorer = () => {
   const { darkMode, setDarkMode } = useDarkMode(); 
@@ -131,9 +132,8 @@ const theme = createTheme({
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={darkMode ? 'dark-mode' : ''}>
-        <AppBar position="static" sx={{ backgroundColor: '#0c51a1' }}>
+        <AppBar position="static" sx={{ backgroundColor: '#0c51a1 !important' }}>
           <Toolbar>
-            {/* <Typography variant="h6">GNIECloud Swagger</Typography> */}
             {location.pathname !== '/' && (
               <IconButton edge="start" color="inherit" onClick={() => navigate(-1)}>
                 <ArrowBackIcon />
@@ -146,9 +146,6 @@ const theme = createTheme({
                 </Link>
               ))}
             </Breadcrumbs>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
-              {/* Define your title here */}
-            </Typography>
             <Select
               labelId="api-select-label"
               id="api-select"
@@ -175,6 +172,7 @@ const theme = createTheme({
             {/* <Typography variant="subtitle1">Total APIs: {totalApisPerApi[selectedApi]}</Typography> */}
           </Toolbar>
         </AppBar>
+        <MaintenanceNotification/>
         <Container className="container">{swaggerData && <SwaggerUI spec={swaggerData} />}</Container>
         <Dialog open={exportOptionsOpen} onClose={() => setExportOptionsOpen(false)}>
           <DialogTitle>Select Export Format</DialogTitle>

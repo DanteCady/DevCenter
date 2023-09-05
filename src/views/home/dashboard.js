@@ -26,6 +26,7 @@ import WelcomeContainer from '../../components/welcomeContainer';
 import { Link } from 'react-router-dom';
 import IGTSphere from '../../assets/IGTSphere.png';
 import { useDarkMode } from '../../DarkModeContext';
+import MaintenanceNotification from '../../components/maintenance';
 
 // Define tiles for dashboard
 const tiles = [
@@ -85,6 +86,7 @@ const Dashboard = () => {
           </Tooltip>
         </Toolbar>
       </AppBar>
+      <MaintenanceNotification/>
       <WelcomeContainer />
       <Container maxWidth="xxl" style={{ marginTop: '-30px', marginBottom: '60px' }}>
         <Grid container spacing={4} style={{ marginTop: '20px' }}>

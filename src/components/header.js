@@ -28,7 +28,7 @@ function Header({ title }) {
   return (
     <>
 
-      <AppBar position="static" sx={{marginBottom: '15px'}}>
+      <AppBar position="static" sx={{marginBottom: '15px', backgroundColor: '#0c51a1'}}>
         <Toolbar>
           {location.pathname !== '/' && (
             <IconButton edge="start" color="inherit" onClick={handleBack}>

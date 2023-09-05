@@ -12,6 +12,7 @@ import {
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Header from '../../components/header';
 import { useDarkMode } from '../../DarkModeContext';
+import MaintenanceNotification from '../../components/maintenance';
 
 // Playground component: Main component to execute and test API calls.
   const Playground = () => {
@@ -118,6 +119,7 @@ const toggleApi = (api, path) => {
     <>
       <CssBaseline />
       <Header />
+      <MaintenanceNotification/>
       <Container maxWidth={false} disableGutters style={{ backgroundColor: darkMode ? '#333' : '#f5f5f5', height: '100vh' }}>
         <Grid container spacing={3}>
           <Grid item xs={3}>
