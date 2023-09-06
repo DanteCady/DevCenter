@@ -76,7 +76,7 @@ const ReleaseNotes = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
+      <AppBar position="static" sx={{backgroundColor: '#0c51a1'}}>
         <Toolbar>
           <IconButton edge="start" color="inherit" onClick={() => navigate(-1)}>
             <ArrowBackIcon />
