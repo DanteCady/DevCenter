@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-import Dashboard from './views/home/dashboard';
+import Dashboard from './views/dashboard/dashboard';
 import ApiExplorer  from './views/api-explorer/api';
 import StatusPage from './views/status/status';
 import ReleaseNotes from './views/releaseNotes/releasenotes';

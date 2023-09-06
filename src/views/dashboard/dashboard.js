@@ -107,7 +107,7 @@ const Dashboard = () => {
                       elevation={0}
                     >
                       <CardContent style={{ marginTop: '50px' }}>
-                        <tile.Icon style={{ fontSize: 50, color: '#0c51a1' }} />
+                        <tile.Icon style={{ fontSize: 50, color: '#ff671f' }} />
                         <Typography variant="h4" gutterBottom style={{ color: darkMode ? '#fff' : '#000' }}>
                           {tile.name}
                         </Typography>
@@ -131,7 +131,7 @@ const Dashboard = () => {
                       elevation={0}
                     >
                       <CardContent style={{ marginTop: '50px' }}>
-                        <tile.Icon style={{ fontSize: 50, color: '#0c51a1' }} />
+                        <tile.Icon style={{ fontSize: 50, color: '#ff671f' }} />
                         <Typography variant="h4" gutterBottom style={{ color: darkMode ? '#fff' : '#000' }}>
                           {tile.name}
                         </Typography>
