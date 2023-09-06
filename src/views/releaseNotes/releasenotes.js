@@ -26,6 +26,30 @@ const ReleaseNotes = () => {
     },
   });
 
+  //Fetch markdown from Azure repo
+  //  const headers = {
+  //   'Authorization': `Basic ${Buffer.from(`:${process.env.REACT_APP_AZURE_PAT}`).toString('base64')}`
+  // };
+
+  //  useEffect(() => {
+  //   const fetchMarkdownFromAzure = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://dev.azure.com/${process.env.REACT_APP_AZURE_ORGANIZATION}/${process.env.REACT_APP_AZURE_PROJECT}/_apis/git/repositories/${process.env.REACT_APP_AZURE_REPOSITORY_ID}/items?path=${selectedVersion}/notes.md&includeContent=true&api-version=6.0`,
+  //         { headers }
+  //       );
+
+  //       if (response.status === 200) {
+  //         setMarkdownContent(response.data.content);
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to fetch markdown file:', error);
+  //     }
+  //   };
+    
+  //   fetchMarkdownFromAzure();
+  // }, [selectedVersion]);
+
   useEffect(() => {
     axios.get(`http://localhost:3001/api/release-notes?version=${selectedVersion}`)
       .then((response) => {
