@@ -1,0 +1,11 @@
+.print-only {
+  display: none;
+}
+
+.pdf-generation-mode .MuiAccordion-root {
+  display: none;
+}
+
+.pdf-generation-mode .print-only {
+  display: block;
+}
