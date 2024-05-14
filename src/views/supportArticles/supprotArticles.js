@@ -1,6 +1,6 @@
 import ComingSoonPage from "../../components/comingSoon";
 import Header from "../../components/header";
-import Footer from "../../components/footer";
+// import Footer from "../../components/footer";
 
 function SupportArticles() {
     
@@ -11,7 +11,7 @@ function SupportArticles() {
             title="Support Articles Coming Soon!"
             description="We are working hard to bring you helpful support articles. Please check back later."
             />
-        <Footer/>
+        {/* <Footer/> */}
         </>
         );
 };

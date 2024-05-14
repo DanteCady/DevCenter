@@ -40,11 +40,11 @@ const WelcomeContainer = () => {
             marginRight: "20px", 
           }}
         >
-          <img
+          {/* <img
             src={Logo}
             style={{ height: "200px", width: "200px" }}
             alt=" logo"
-          />
+          /> */}
         </Box>
 
         {/* Content Grid */}

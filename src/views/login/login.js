@@ -11,7 +11,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import LogInModal from "../../components/auth/loginModal";
 import { myMSALObj } from "../../services/sso/authConfig";
 import { signIn } from "../../services/sso/authPopup";
-
+import MicrosoftSSO from "../../assets/ms-symbollockup_signin_light.png";
 const Login = ({ msalInstance }) => {
         console.log("MSAL Instance:", msalInstance);
   const [modalOpen, setModalOpen] = useState(false);
@@ -76,11 +76,11 @@ const handleSSO = async () => {
           textAlign: "center",
         }}
       >
-        <img
+        {/* <img
           src={Logo}
           alt="Logo"
           style={{ height: "150px", marginRight: "10px", marginBottom: "45px" }}
-        />
+        /> */}
         <div style={{ marginTop: "20px" }}>
           <Typography
             variant="h2"
@@ -98,26 +98,32 @@ const handleSSO = async () => {
             variant="h2"
             sx={{ fontWeight: "bold", color: "#ff571f", display: "inline" }}
           >
-            Developer
+            Developer Center
           </Typography>
           <br /> {/* Add line break */}
           <Typography
             sx={{
               fontSize: "15px",
               mt: "15px",
-              mr: "115px",
+              mr: "25px",
               color: "white",
             }}
           >
             <Button
             sx={{color:"white"}}
-            onClick={handleSSO}
             >Sign In</Button>
-            {/* {" | "}
+            {" | "}
             <a href="/#" style={{ textDecoration: "none", color: "white" }}>
               Request Account
-            </a> */}
+            </a>
           </Typography>
+          <Button>
+          <img
+          src={MicrosoftSSO}
+          alt="Logo"
+          style={{ height: "25px", marginRight: "10px", marginBottom: "45px" }}
+        /> 
+        </Button>
         </div>
 
         <LogInModal open={modalOpen} onClose={handleCloseModal} />

@@ -134,11 +134,11 @@ const Dashboard = ({ profilePicture }) => {
               component="span"
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <img
+              {/* <img
                 src={Logo}
                 style={{ height: "60px", width: "60px" }}
                 alt="logo"
-              />
+              /> */}
              Developer Center
             </Box>
           </Typography>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Typography, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Header from '../../components/header';
-import Footer from '../../components/footer';
+// import Footer from '../../components/footer';
 import MaintenanceNotification from "../../components/maintenance"
 import { useDarkMode } from '../../DarkModeContext';
 
@@ -82,7 +82,7 @@ const StatusPage = () => {
         </div>
         {renderStatusPage()}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
