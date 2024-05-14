@@ -1,4 +1,4 @@
-# GNIECloud Release Notes
+# Release Notes
 
 ---
 

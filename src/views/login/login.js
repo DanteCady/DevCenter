@@ -12,13 +12,14 @@ import LogInModal from "../../components/auth/loginModal";
 import { myMSALObj } from "../../services/sso/authConfig";
 import { signIn } from "../../services/sso/authPopup";
 import MicrosoftSSO from "../../assets/ms-symbollockup_signin_light.png";
+
 const Login = ({ msalInstance }) => {
-        console.log("MSAL Instance:", msalInstance);
+  console.log("MSAL Instance:", msalInstance);
   const [modalOpen, setModalOpen] = useState(false);
 
-//   const handleSignInClick = () => {
-//     setModalOpen(true);
-//   };
+  const handleSignInClick = () => {
+    setModalOpen(true);
+  };
 
 const handleSSO = async () => {
   try {
@@ -111,6 +112,7 @@ const handleSSO = async () => {
           >
             <Button
             sx={{color:"white"}}
+            onClick={handleSignInClick}
             >Sign In</Button>
             {" | "}
             <a href="/#" style={{ textDecoration: "none", color: "white" }}>
@@ -120,6 +122,7 @@ const handleSSO = async () => {
           <Button>
           <img
           src={MicrosoftSSO}
+          onClick={handleSSO}
           alt="Logo"
           style={{ height: "25px", marginRight: "10px", marginBottom: "45px" }}
         /> 
