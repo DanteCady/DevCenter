@@ -82,7 +82,7 @@ const toggleApi = (api, path) => {
   setSelectedApi(api);
 
   if (path) {
-    setRequestUrl(`https://api.gniecloud.com${path}`);
+    setRequestUrl(`(API)${path}`);
     setSelectedMethod('GET'); // Set the default method to 'GET'
   } else {
     setRequestUrl('');
@@ -125,7 +125,7 @@ const toggleApi = (api, path) => {
           <Grid item xs={3}>
             <Paper elevation={3} style={{ backgroundColor: darkMode ? '#444' : '#fff' }}>
               <Typography variant="h6" align="center" style={{ color: darkMode ? '#fff' : '#000' }}>
-                GNIECloud API List
+                API List
               </Typography>
               {isLoading ? (
                 <CircularProgress />

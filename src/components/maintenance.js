@@ -11,7 +11,7 @@ function MaintenanceNotification() {
 
   useEffect(() => {
     // Fetch the maintenance details from the API when the component mounts
-    axios.get('https://api.gniecloud.com/api/maintenance/banner/details', {
+    axios.get('https://api/api/maintenance/banner/details', {
       headers: {
         'Cache-Control': 'no-cache',
       },

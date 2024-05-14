@@ -1,0 +1,38 @@
+/* Add this to your styles.css or the equivalent */
+.react-pro-sidebar .pro-sidebar > .pro-menu > ul > .pro-sub-menu > ul > li > span {
+  display: none !important;
+}
+
+/* Change the background color */
+.pro-sidebar {
+  color: #fff;
+}
+.pro-sidebar-inner {
+  background: #0c51a1 !important;
+}
+/* Change the text size */
+.pro-sidebar a {
+  font-size: 20px;
+  color: #fff;
+}
+.pro-sidebar .pro-menu a {
+ color: #fff;
+}
+.pro-item-content {
+   font-size: 20px;
+}
+.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item {
+    position: relative;
+    background-color: #064792 !important;
+}
+.pro-arrow-wrapper .pro-arrow {
+  font-size: 30px !important;
+  color: #ffa600;
+}
+.pro-sidebar.collapsed .pro-menu > ul > .pro-menu-item.pro-sub-menu > .pro-inner-list-item > .popper-inner {
+  max-height: 100vh;
+  overflow-y: auto;
+  background-color: #064792 ;
+  padding-left: 20px;
+  border-radius: 4px;
+}

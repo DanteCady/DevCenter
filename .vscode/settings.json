@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/92287e6b-ea73-439b-9c61-d42c43d68d00/resourceGroups/gnie-useast-rg/providers/Microsoft.Web/sites/gnie-useast-devcenter",
+    "appService.deploySubpath": "."
+}

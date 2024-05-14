@@ -1,13 +1,15 @@
 openapi: 3.0.0
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/CONTACTCENTERSERVICE/GNIECloudFiles/1.0.0
   - description: Local Development Server
     url: http://localhost:3001
   - description: Production Server
     url: https://api.gniecloud.com/
 info:
-  description: GNIECloud Files API
+  description: |
+    GNIECloud Files API
+
+    **Authentication**: Bearer token is required for all endpoints.
+
   version: "1.0.0"
   title: GNIECloud Files API
   contact:
@@ -22,7 +24,7 @@ tags:
     description: File upload operations
 
 paths:
-  /api/v1/files:
+  /v1/filemanagement/{country}/{organization}/{team}/files:
     get:
       tags:
         - File-Operations
@@ -44,10 +46,12 @@ paths:
                       type: string
                     fileType:
                       type: string
+        '404':
+          description: Not Found              
         '500':
-          description: Internal server error
+          description: Internal Server Error
 
-  /api/v1/files/{articleID}:
+  /v1/filemanagement/{country}/{organization}/{team}/{articleID}:
     get:
       tags:
         - File-Operations
@@ -69,9 +73,8 @@ paths:
         '404':
           description: File not found
         '500':
-          description: Internal server error
+          description: Internal Server Error
           
-    /api/v1/files/{articleID}:      
     delete:
       tags:
         - File-Operations
@@ -98,9 +101,9 @@ paths:
         '404':
           description: File not found
         '500':
-          description: Internal server error
+          description: Internal Server Error
 
-  /api/v1/files/upload:
+  /v1/filemanagement/{country}/{organization}/{team}/upload:
     post:
       tags:
         - File-Upload
@@ -123,9 +126,9 @@ paths:
         '400':
           description: Bad request
         '500':
-          description: Internal server error
+          description: Internal Server Error
 
-  /api/v1/files/{fileName}:
+  /v1/filemanagement/{country}/{organization}/{team}/{fileName}:
     delete:
       tags:
         - File-Operations
@@ -141,7 +144,8 @@ paths:
         '200':
           description: File deleted successfully
         '500':
-          description: Internal server error
+          description: Internal Server Error
+
 components:
   schemas:
     File:

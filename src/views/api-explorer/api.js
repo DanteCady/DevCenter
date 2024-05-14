@@ -33,7 +33,7 @@ import '../../swagger-styles.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useDarkMode } from '../../DarkModeContext';
-import MaintenanceNotification from '../../components/maintenance';
+// import MaintenanceNotification from '../../components/maintenance';
 
 const ApiExplorer = () => {
   const { darkMode, setDarkMode } = useDarkMode(); 
@@ -47,17 +47,20 @@ const ApiExplorer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/docs/list')
-      .then(response => {
+    axios
+      .get(
+        "https://api/v1/developercenter/system/docs/list"
+      )
+      .then((response) => {
         setApiList(response.data);
         setSelectedApi(response.data[0]);
         const apiCountObj = {};
-        response.data.forEach(api => {
+        response.data.forEach((api) => {
           apiCountObj[api] = 0;
         });
         setTotalApisPerApi(apiCountObj);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching API list:", error);
       });
   }, []);
@@ -65,32 +68,28 @@ const ApiExplorer = () => {
   useEffect(() => {
     if (!selectedApi) return;
 
-    axios.get(`http://localhost:3001/api/docs/${selectedApi}`)
-      .then(response => {
+    axios
+      .get(
+        `https://api/v1/developercenter/system/docs/${selectedApi}`
+      )
+      .then((response) => {
         setSwaggerData(response.data);
 
         const paths = response.data.paths;
         const pathCount = Object.keys(paths).length;
 
-        setTotalApisPerApi(prevState => ({
+        setTotalApisPerApi((prevState) => ({
           ...prevState,
-          [selectedApi]: pathCount
+          [selectedApi]: pathCount,
         }));
       })
-      .catch(error => {
-        console.error(`Error fetching Swagger data for API ${selectedApi}:`, error);
+      .catch((error) => {
+        console.error(
+          `Error fetching Swagger data for API ${selectedApi}:`,
+          error
+        );
       });
   }, [selectedApi]);
-
-  // useEffect(() => {
-  //   const savedTheme = localStorage.getItem('theme');
-  //   if (savedTheme) {
-  //     setThemeMode(savedTheme);
-  //   } else {
-  //     localStorage.setItem('theme', 'light');
-  //     setThemeMode('light');
-  //   }
-  // }, []);
 
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
@@ -172,7 +171,7 @@ const theme = createTheme({
             {/* <Typography variant="subtitle1">Total APIs: {totalApisPerApi[selectedApi]}</Typography> */}
           </Toolbar>
         </AppBar>
-        <MaintenanceNotification/>
+        {/* <MaintenanceNotification/> */}
         <Container className="container">{swaggerData && <SwaggerUI spec={swaggerData} />}</Container>
         <Dialog open={exportOptionsOpen} onClose={() => setExportOptionsOpen(false)}>
           <DialogTitle>Select Export Format</DialogTitle>

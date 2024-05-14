@@ -2,10 +2,41 @@ openapi: 3.0.0
 servers:
   - description: Local Development Server
     url: http://localhost:3001
-  - description: Production Server
-    url: https://api.joomla.com/
+  - description: Production Server - cacc
+    url: https://cacc.kb.gniecloud.com/
+  - description: Production Server - crcc
+    url: https://crcc.kb.gniecloud.com/
+  - description: Production Server - docc
+    url: https://docc.kb.gniecloud.com/
+  - description: Production Server - jmcc
+    url: https://jmcc.kb.gniecloud.com/
+  - description: Production Server - mxcc
+    url: https://mxcc.kb.gniecloud.com/
+  - description: Production Server - mxgom
+    url: https://mxgom.kb.gniecloud.com/
+  - description: Production Server - plcc
+    url: https://plcc.kb.gniecloud.com/
+  - description: Production Server - ttcc
+    url: https://ttcc.kb.gniecloud.com/
+  - description: Production Server - uscc
+    url: https://uscc.kb.gniecloud.com/
+  - description: Production Server - usccs
+    url: https://usccs.kb.gniecloud.com/
+  - description: Production Server - usfst
+    url: https://usfst.kb.gniecloud.com/
+  - description: Production Server - usgcs
+    url: https://usgcs.kb.gniecloud.com/
+  - description: Production Server - usto
+    url: https://usto.kb.gniecloud.com/
+  - description: Production Server - uswf
+    url: https://uswf.kb.gniecloud.com/
+
 info:
-  description: Joomla API
+  description: |
+    Joomla API
+
+    **Authentication**: Bearer token is required for all endpoints.
+
   version: "1.0.0"
   title: Joomla API
   contact:
