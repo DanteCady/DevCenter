@@ -49,7 +49,7 @@ const ApiExplorer = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api/v1/developercenter/system/docs/list"
+        "http://localhost:3001/api/docs/list"
       )
       .then((response) => {
         setApiList(response.data);
@@ -70,7 +70,7 @@ const ApiExplorer = () => {
 
     axios
       .get(
-        `https://api/v1/developercenter/system/docs/${selectedApi}`
+        `http://localhost:3001/api/docs/${selectedApi}`
       )
       .then((response) => {
         setSwaggerData(response.data);

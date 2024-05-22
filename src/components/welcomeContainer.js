@@ -62,7 +62,7 @@ const WelcomeContainer = () => {
             </Typography>
           </Grid>
           {/* Search Input */}
-          {/* <Grid item xs={12}>
+          <Grid item xs={12}>
             <TextField
               variant="filled"
               placeholder="Search APIs, Documentation..."
@@ -77,7 +77,7 @@ const WelcomeContainer = () => {
               onChange={handleSearchChange}
               fullWidth
             />
-          </Grid> */}
+          </Grid>
         </Grid>
       </Box>
     </Container>
