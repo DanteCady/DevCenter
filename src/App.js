@@ -19,7 +19,7 @@ function App() {
         <CssBaseline />
         <Routes>
           <Route path="/" element={<Login msalInstance={myMSALObj} />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login msalInstance={myMSALObj} />} />
           <Route path="/service/:service" element={<ApiExplorer />} />
           <Route path="/service/status" element={<StatusPage />} />
