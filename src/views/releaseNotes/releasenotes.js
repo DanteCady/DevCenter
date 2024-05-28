@@ -21,6 +21,9 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -29,7 +32,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { useDarkMode } from "../../DarkModeContext";
 import { useNavigate } from "react-router-dom";
 import html2pdf from "html2pdf.js";
-import ServiceSidebar from "../../components/releaseNotes/serviceSidebar";
+
 const ReleaseNotes = () => {
   const { darkMode, setDarkMode } = useDarkMode();
   const [selectedVersion, setSelectedVersion] = useState("1.0");
@@ -72,7 +75,6 @@ const ReleaseNotes = () => {
       }));
     }
   };
-
 
   useEffect(() => {
     axios
@@ -131,15 +133,23 @@ const ReleaseNotes = () => {
         </Toolbar>
       </AppBar>
       <Box display="flex" sx={{ height: "100vh" }}>
-        {/* Service Sidebar Section */}
-        <ServiceSidebar
-          selectedService={selectedVersion}
-          onSelectService={setSelectedVersion}
-        />
-
+        {/* Sidebar for Versions */}
+        <Container sx={{ maxWidth: "250px", padding: "20px" }}>
+          <Typography variant="h6" gutterBottom>
+            Versions
+          </Typography>
+          <List>
+            <ListItem button onClick={() => setSelectedVersion("1.0")} selected={selectedVersion === "1.0"}>
+              <ListItemText primary="Version 1.0" />
+            </ListItem>
+            <ListItem button onClick={() => setSelectedVersion("2.0")} selected={selectedVersion === "2.0"}>
+              <ListItemText primary="Version 2.0" />
+            </ListItem>
+          </List>
+        </Container>
+        {/* Release Notes Section */}
         <Container>
           <Grid container spacing={3}>
-            {/* Release Notes Section */}
             <Grid item xs={12} md={6}>
               <Box p={3} mt={3} ref={contentRef}>
                 <Paper elevation={3}>
@@ -152,7 +162,6 @@ const ReleaseNotes = () => {
                 </Paper>
               </Box>
             </Grid>
-
             {/* Subscribe Section */}
             <Grid item xs={12} md={4}>
               <Paper elevation={3}>
@@ -165,56 +174,19 @@ const ReleaseNotes = () => {
                       Select services:
                     </Typography>
                     <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={services.all}
-                            onChange={handleServiceChange}
-                            name="all"
-                          />
-                        }
-                        label="All"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={services.files}
-                            onChange={handleServiceChange}
-                            name="files"
-                          />
-                        }
-                        label=" Files"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={services.forms}
-                            onChange={handleServiceChange}
-                            name="forms"
-                          />
-                        }
-                        label=" Forms"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={services.knowledgebase}
-                            onChange={handleServiceChange}
-                            name="knowledgebase"
-                          />
-                        }
-                        label=" Knowledgebase"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={services.maps}
-                            onChange={handleServiceChange}
-                            name="maps"
-                          />
-                        }
-                        label=" Maps"
-                      />
+                      {Object.entries(services).map(([key, value]) => (
+                        <FormControlLabel
+                          key={key}
+                          control={
+                            <Checkbox
+                              checked={value}
+                              onChange={handleServiceChange}
+                              name={key}
+                            />
+                          }
+                          label={key.charAt(0).toUpperCase() + key.slice(1)}
+                        />
+                      ))}
                     </FormGroup>
                   </Box>
                   <TextField
