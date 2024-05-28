@@ -38,7 +38,6 @@ const tiles = [
   { id: 'support-articles', name: 'Support Articles', description: 'Find comprehensive articles, how-to guides, and best practices that will help you overcome development challenges and make the most out of th  platform.', Icon: BuildIcon, link: '/service/support-articles' },
   { id: 'submit-request', name: 'Submit Request', description: 'Reach out to our dedicated support team for comprehensive assistance tailored to your specific needs.', Icon: HelpOutlineIcon, link: '' },
   { id: 'release-notes', name: 'Release Notes', description: 'Stay up-to-date with the latest enhancements, fixes, and features by accessing our comprehensive release notes\.', Icon: UpdateIcon, link: '/service/release-notes' },
-  { id: 'Status', name: 'Status', description: 'Real-time information on system health, including uptime statistics and performance metrics. Be the first to know about any service interruptions on our platform.', Icon: AnnouncementOutlinedIcon, link: '/service/status' },
   { id: 'Playground', name: 'Playground', description: 'A sandbox environment where you can experiment with our APIs and features without any commitments. Ideal for learning and pre-production testing.', Icon: EngineeringIcon, link: '/service/playground' },
 
 ];
