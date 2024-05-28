@@ -18,12 +18,6 @@ import {
   Button,
   Grid,
   TextField,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  List,
-  ListItem,
-  ListItemText,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -36,7 +30,6 @@ import html2pdf from "html2pdf.js";
 const ReleaseNotes = () => {
   const { darkMode, setDarkMode } = useDarkMode();
   const [selectedVersion, setSelectedVersion] = useState("1.0");
-  const [selectedService, setSelectedService] = useState("all");
   const [markdownContent, setMarkdownContent] = useState("");
   const contentRef = React.useRef(null);
   const navigate = useNavigate();
@@ -46,35 +39,6 @@ const ReleaseNotes = () => {
       mode: darkMode ? "dark" : "light",
     },
   });
-
-  const [services, setServices] = useState({
-    all: false,
-    files: false,
-    forms: false,
-    knowledgebase: false,
-    maps: false,
-  });
-
-  const handleServiceChange = (event) => {
-    const { name, checked } = event.target;
-
-    // If the "All" checkbox is selected, all other checkboxes should match its state
-    if (name === "all") {
-      setServices((prevServices) => ({
-        all: checked,
-        files: checked,
-        forms: checked,
-        knowledgebase: checked,
-        maps: checked,
-      }));
-    } else {
-      setServices((prevServices) => ({
-        ...prevServices,
-        [name]: checked,
-        all: false, // If any individual service is unchecked, "All" should be unchecked
-      }));
-    }
-  };
 
   useEffect(() => {
     axios
@@ -133,24 +97,24 @@ const ReleaseNotes = () => {
         </Toolbar>
       </AppBar>
       <Box display="flex" sx={{ height: "100vh" }}>
-        {/* Sidebar for Versions */}
-        <Container sx={{ maxWidth: "250px", padding: "20px" }}>
+        {/* Version Pane */}
+        <Container sx={{ maxWidth: "150px", padding: "20px" }}>
           <Typography variant="h6" gutterBottom>
             Versions
           </Typography>
-          <List>
-            <ListItem button onClick={() => setSelectedVersion("1.0")} selected={selectedVersion === "1.0"}>
-              <ListItemText primary="Version 1.0" />
-            </ListItem>
-            <ListItem button onClick={() => setSelectedVersion("2.0")} selected={selectedVersion === "2.0"}>
-              <ListItemText primary="Version 2.0" />
-            </ListItem>
-          </List>
+          <Select
+            fullWidth
+            value={selectedVersion}
+            onChange={(e) => setSelectedVersion(e.target.value)}
+          >
+            <MenuItem value="1.0">Version 1.0</MenuItem>
+            <MenuItem value="2.0">Version 2.0</MenuItem>
+          </Select>
         </Container>
         {/* Release Notes Section */}
         <Container>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <Box p={3} mt={3} ref={contentRef}>
                 <Paper elevation={3}>
                   <Box p={3}>
@@ -163,43 +127,21 @@ const ReleaseNotes = () => {
               </Box>
             </Grid>
             {/* Subscribe Section */}
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12}>
               <Paper elevation={3}>
-                <Box p={3} sx={{ mt: "5px" }}>
+                <Box p={3}>
                   <Typography variant="h6" gutterBottom>
                     Subscribe to Release Notes
                   </Typography>
-                  <Box mt={2}>
-                    <Typography variant="body1" gutterBottom>
-                      Select services:
-                    </Typography>
-                    <FormGroup>
-                      {Object.entries(services).map(([key, value]) => (
-                        <FormControlLabel
-                          key={key}
-                          control={
-                            <Checkbox
-                              checked={value}
-                              onChange={handleServiceChange}
-                              name={key}
-                            />
-                          }
-                          label={key.charAt(0).toUpperCase() + key.slice(1)}
-                        />
-                      ))}
-                    </FormGroup>
-                  </Box>
                   <TextField
                     fullWidth
                     label="Email Address"
                     variant="outlined"
-                    sx={{ height: "15px", mb: "45px" }}
+                    sx={{ mb: 2 }}
                   />
-                  <Box mt={2}>
-                    <Button variant="contained" color="primary" fullWidth>
-                      Subscribe
-                    </Button>
-                  </Box>
+                  <Button variant="contained" color="primary" fullWidth>
+                    Subscribe
+                  </Button>
                 </Box>
               </Paper>
             </Grid>
