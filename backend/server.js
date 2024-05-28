@@ -11,7 +11,7 @@ app.use(bodyParser.json()); // added for parsing JSON in POST requests
 
 // Get list of all available APIs
 app.get('/api/docs/list', (req, res) => {
-    const apiDir = path.join(__dirname, './swaggerdocs'); // Updated the folder name here
+    const apiDir = path.join(__dirname, './swaggerdocs'); 
     fs.readdir(apiDir, (err, files) => {
         if (err) {
             console.error("Error scanning directory:", err);
@@ -26,7 +26,7 @@ app.get('/api/docs/list', (req, res) => {
 app.get('/api/docs/:apiName', (req, res) => {
     console.log("API requested:", req.params.apiName);
     const apiName = req.params.apiName;
-    const filePath = path.join(__dirname, `./swaggerdocs/${apiName}.yaml`); // Updated the folder name here
+    const filePath = path.join(__dirname, `./swaggerdocs/${apiName}.yaml`); 
     if (fs.existsSync(filePath)) {
         const file = fs.readFileSync(filePath, 'utf8');
         const yamlData = YAML.load(file);
@@ -38,7 +38,7 @@ app.get('/api/docs/:apiName', (req, res) => {
 
 // Get release notes in Markdown
 app.get('/api/release-notes', (req, res) => {
-    const releaseNotesPath = path.join(__dirname, './releaseNotes/relelaseNotes.md'); // Update the path to where your release notes file is stored
+    const releaseNotesPath = path.join(__dirname, './releaseNotes/relelaseNotes.md');
 
     if (fs.existsSync(releaseNotesPath)) {
         const releaseNotes = fs.readFileSync(releaseNotesPath, 'utf8');

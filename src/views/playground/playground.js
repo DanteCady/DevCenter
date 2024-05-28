@@ -7,7 +7,7 @@ import {
   ListItemText, Typography, CircularProgress,
   Collapse, ListItemIcon, TextField, Button,
   TextareaAutosize, CssBaseline, FormControl,
-  Select, MenuItem,
+  Select, MenuItem,Box
 } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Header from '../../components/header';
@@ -260,16 +260,19 @@ const toggleApi = (api, path) => {
                       Execute
                     </Button>
                   </div>
-                  <div style={{ backgroundColor: darkMode ? '#333' : '#fff', padding: '1em', borderRadius: '5px', marginTop: '1em' }}>
-                    <Typography variant="h6" style={{ color: darkMode ? '#fff' : '#000' }}>Response</Typography>
-                    <pre style={{ color: darkMode ? '#fff' : '#000', overflowX: 'scroll' }}>
+                  <div style={{ backgroundColor: darkMode ? '#333' : '#fff', padding: '1em', borderRadius: '5px', marginTop: '1em', maxHeight: '300px', overflowY: 'auto' }}>
+                  <Typography variant="h6" style={{ color: darkMode ? '#fff' : '#000' }}>Response</Typography>
+                  <Box style={{ maxHeight: '100%', overflowY: 'auto' }}>
+                    <pre style={{ color: darkMode ? '#fff' : '#000', overflowX: 'scroll', margin: 0 }}>
                       {response !== null ? (
                         response
                       ) : (
                         'Execute an API to see the response here.'
                       )}
                     </pre>
-                  </div>
+                  </Box>
+                </div>
+
                 </>
               )}
             </Paper>
